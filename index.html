@@ -1,0 +1,1164 @@
+<html>
+
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            background-color: #fff;
+            color: #8da1ad;
+        }
+        
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .summary {
+            margin-top: 50px;
+        }
+        
+        .summary div {
+            width: 80%;
+            height: 300px;
+            border: 1px solid #8da1ad;
+            margin-top: 30px;
+            font-size: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+        
+        .summary div span:nth-child(2) {
+            font-size: 50px;
+            color: #ddc728;
+        }
+        
+        .green-color {
+            color: #2eab6f;
+        }
+        
+        .summary div a {
+            font-size: 20px;
+            position: relative;
+            bottom: 3px;
+        }
+        
+        a,
+        a:visited {
+            color: #8da1ad
+        }
+    </style>
+
+</head>
+
+
+
+
+
+<body>
+
+    <h1>E-commerce Radar - Top 100 sales in 30 days</h1>
+
+    <div class="flex">
+        <div id="container" style="width:100%;height:300px"></div>
+
+
+    </div>
+
+
+    <div class="summary flex">
+        <a href="https://shopee.com.my/search?keyword=wiper%20bosch&page=0&sortBy=sales">Search for "wiper bosch" in Shopee Malaysia</a>
+        <h6>2021-04-25 SUN He</h6>
+    </div>
+
+    <!-- <script src="./jquery.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- <script src="./chart.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.1.0/echarts.min.js"></script>
+
+    <!-- <script src="./underscore.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
+
+    <script type="text/javascript">
+        var googleTrend = [{
+            "Week": "4/26/2020",
+            "shopee: (Malaysia)": "88",
+            "lazada: (Malaysia)": "54",
+            "grab: (Malaysia)": "12"
+        }, {
+            "Week": "5/3/2020",
+            "shopee: (Malaysia)": "81",
+            "lazada: (Malaysia)": "48",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "5/10/2020",
+            "shopee: (Malaysia)": "81",
+            "lazada: (Malaysia)": "52",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "5/17/2020",
+            "shopee: (Malaysia)": "70",
+            "lazada: (Malaysia)": "42",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "5/24/2020",
+            "shopee: (Malaysia)": "85",
+            "lazada: (Malaysia)": "46",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "5/31/2020",
+            "shopee: (Malaysia)": "89",
+            "lazada: (Malaysia)": "44",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "6/7/2020",
+            "shopee: (Malaysia)": "76",
+            "lazada: (Malaysia)": "38",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "6/14/2020",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "40",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "6/21/2020",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "38",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "6/28/2020",
+            "shopee: (Malaysia)": "79",
+            "lazada: (Malaysia)": "39",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "7/5/2020",
+            "shopee: (Malaysia)": "84",
+            "lazada: (Malaysia)": "51",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "7/12/2020",
+            "shopee: (Malaysia)": "80",
+            "lazada: (Malaysia)": "43",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "7/19/2020",
+            "shopee: (Malaysia)": "77",
+            "lazada: (Malaysia)": "37",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "7/26/2020",
+            "shopee: (Malaysia)": "69",
+            "lazada: (Malaysia)": "37",
+            "grab: (Malaysia)": "12"
+        }, {
+            "Week": "8/2/2020",
+            "shopee: (Malaysia)": "79",
+            "lazada: (Malaysia)": "46",
+            "grab: (Malaysia)": "16"
+        }, {
+            "Week": "8/9/2020",
+            "shopee: (Malaysia)": "77",
+            "lazada: (Malaysia)": "43",
+            "grab: (Malaysia)": "14"
+        }, {
+            "Week": "8/16/2020",
+            "shopee: (Malaysia)": "68",
+            "lazada: (Malaysia)": "37",
+            "grab: (Malaysia)": "13"
+        }, {
+            "Week": "8/23/2020",
+            "shopee: (Malaysia)": "71",
+            "lazada: (Malaysia)": "35",
+            "grab: (Malaysia)": "12"
+        }, {
+            "Week": "8/30/2020",
+            "shopee: (Malaysia)": "73",
+            "lazada: (Malaysia)": "34",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "9/6/2020",
+            "shopee: (Malaysia)": "89",
+            "lazada: (Malaysia)": "49",
+            "grab: (Malaysia)": "12"
+        }, {
+            "Week": "9/13/2020",
+            "shopee: (Malaysia)": "65",
+            "lazada: (Malaysia)": "32",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "9/20/2020",
+            "shopee: (Malaysia)": "68",
+            "lazada: (Malaysia)": "32",
+            "grab: (Malaysia)": "12"
+        }, {
+            "Week": "9/27/2020",
+            "shopee: (Malaysia)": "67",
+            "lazada: (Malaysia)": "29",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "10/4/2020",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "30",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "10/11/2020",
+            "shopee: (Malaysia)": "73",
+            "lazada: (Malaysia)": "28",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "10/18/2020",
+            "shopee: (Malaysia)": "73",
+            "lazada: (Malaysia)": "32",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "10/25/2020",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "28",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "11/1/2020",
+            "shopee: (Malaysia)": "79",
+            "lazada: (Malaysia)": "35",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "11/8/2020",
+            "shopee: (Malaysia)": "100",
+            "lazada: (Malaysia)": "57",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "11/15/2020",
+            "shopee: (Malaysia)": "75",
+            "lazada: (Malaysia)": "32",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "11/22/2020",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "29",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "11/29/2020",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "28",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "12/6/2020",
+            "shopee: (Malaysia)": "93",
+            "lazada: (Malaysia)": "38",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "12/13/2020",
+            "shopee: (Malaysia)": "74",
+            "lazada: (Malaysia)": "29",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "12/20/2020",
+            "shopee: (Malaysia)": "66",
+            "lazada: (Malaysia)": "22",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "12/27/2020",
+            "shopee: (Malaysia)": "65",
+            "lazada: (Malaysia)": "22",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "1/3/2021",
+            "shopee: (Malaysia)": "72",
+            "lazada: (Malaysia)": "23",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "1/10/2021",
+            "shopee: (Malaysia)": "76",
+            "lazada: (Malaysia)": "25",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "1/17/2021",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "25",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "1/24/2021",
+            "shopee: (Malaysia)": "78",
+            "lazada: (Malaysia)": "27",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "1/31/2021",
+            "shopee: (Malaysia)": "83",
+            "lazada: (Malaysia)": "26",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "2/7/2021",
+            "shopee: (Malaysia)": "72",
+            "lazada: (Malaysia)": "20",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "2/14/2021",
+            "shopee: (Malaysia)": "69",
+            "lazada: (Malaysia)": "19",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "2/21/2021",
+            "shopee: (Malaysia)": "71",
+            "lazada: (Malaysia)": "20",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "2/28/2021",
+            "shopee: (Malaysia)": "72",
+            "lazada: (Malaysia)": "23",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "3/7/2021",
+            "shopee: (Malaysia)": "70",
+            "lazada: (Malaysia)": "20",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "3/14/2021",
+            "shopee: (Malaysia)": "65",
+            "lazada: (Malaysia)": "21",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "3/21/2021",
+            "shopee: (Malaysia)": "68",
+            "lazada: (Malaysia)": "30",
+            "grab: (Malaysia)": "9"
+        }, {
+            "Week": "3/28/2021",
+            "shopee: (Malaysia)": "68",
+            "lazada: (Malaysia)": "22",
+            "grab: (Malaysia)": "10"
+        }, {
+            "Week": "4/4/2021",
+            "shopee: (Malaysia)": "75",
+            "lazada: (Malaysia)": "20",
+            "grab: (Malaysia)": "12"
+        }, {
+            "Week": "4/11/2021",
+            "shopee: (Malaysia)": "66",
+            "lazada: (Malaysia)": "19",
+            "grab: (Malaysia)": "11"
+        }, {
+            "Week": "4/18/2021",
+            "shopee: (Malaysia)": "72",
+            "lazada: (Malaysia)": "20",
+            "grab: (Malaysia)": "9"
+        }];
+        var myChart = echarts.init(document.getElementById("container"));
+
+
+        var option = {
+            color: ['#80FFA5', '#00DDFF', '#37A2FF'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                }
+            },
+            // legend: {
+            //     data: ['Shopee', 'Lazada', 'Grab']
+            // },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            title: {
+                text: 'Shopee, Lazada and Grab',
+
+                subtext: 'Google Trend Malaysia, From 2020-04 to 2021-04'
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: googleTrend.map(i => i.Week),
+                axisLabel: {
+                    interval: 3,
+                    rotate: 90
+
+                }
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: 'Shopee',
+                type: 'line',
+
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(128, 255, 165)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(1, 191, 236)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: googleTrend.map(i => i['shopee: (Malaysia)'])
+            }, {
+                name: 'Lazada',
+                type: 'line',
+
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(0, 221, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(77, 119, 255)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: googleTrend.map(i => i['lazada: (Malaysia)'])
+            }, {
+                name: 'Grab',
+                type: 'line',
+
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgba(55, 162, 255)'
+                    }, {
+                        offset: 1,
+                        color: 'rgba(116, 21, 219)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                data: googleTrend.map(i => i['grab: (Malaysia)'])
+            }]
+        };
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+
+
+
+
+        var shopee = [{
+            "order": 0,
+            "value": ["6.40", "9.50"],
+            "product": "Japan Mugen Silicone Car Wiper Windshied For Proton Perodua Honda Toyota Nissan Hyundai Myvi Axia Kancil Axia Alza Viva",
+            "sales": "2.1k sold/month",
+            "links": "/Japan-Mugen-Silicone-Car-Wiper-Windshied-For-Proton-Perodua-Honda-Toyota-Nissan-Hyundai-Myvi-Axia-Kancil-Axia-Alza-Viva-i.8005412.1735162543"
+        }, {
+            "order": 1,
+            "value": ["6.50"],
+            "product": "🔥Japan Silicone🔥 Car Wiper Perodua Proton Toyota Honda Mazda Nissan Hyundai Suzuki",
+            "sales": "1.2k sold/month",
+            "links": "/🔥Japan-Silicone🔥-Car-Wiper-Perodua-Proton-Toyota-Honda-Mazda-Nissan-Hyundai-Suzuki-i.102913376.2163160750"
+        }, {
+            "order": 2,
+            "value": ["17.90"],
+            "product": "(FREE GIFT🎁) PROTON EXORA 2009-2021 PREMIUM WIPER BLADE",
+            "sales": "",
+            "links": "/(FREE-GIFT🎁)-PROTON-EXORA-2009-2021-PREMIUM-WIPER-BLADE-i.403411419.6883899006"
+        }, {
+            "order": 3,
+            "value": ["14.50", "18.53"],
+            "product": "[For 1,000 Car Models] U-Hook Boneless Original Wischer Nano-BOND Wiper Blade (12-30\" Inch) Perodua Proton Toyota Honda",
+            "sales": "255 sold/month",
+            "links": "/-For-1-000-Car-Models-U-Hook-Boneless-Original-Wischer-Nano-BOND-Wiper-Blade-(12-30-Inch)-Perodua-Proton-Toyota-Honda-i.265609355.3236147887"
+        }, {
+            "order": 4,
+            "value": ["17.90"],
+            "product": "(FREE GIFT🎁) PROTON IRIZ 2014-2021 PREMIUM WIPER BLADE",
+            "sales": "",
+            "links": "/(FREE-GIFT🎁)-PROTON-IRIZ-2014-2021-PREMIUM-WIPER-BLADE-i.403411419.7083903075"
+        }, {
+            "order": 5,
+            "value": ["8.38", "13.50"],
+            "product": "Bosch Advantage Car Windshield Wiper U-Hook Type (1 Unit) Perodua / Proton / Toyota / Honda / Nissan / Mazda",
+            "sales": "317 sold/month",
+            "links": "/Bosch-Advantage-Car-Windshield-Wiper-U-Hook-Type-(1-Unit)-Perodua-Proton-Toyota-Honda-Nissan-Mazda-i.115939874.2380785348"
+        }, {
+            "order": 6,
+            "value": ["7.00", "28.50"],
+            "product": "100% ORIGINAL Bosch Advantage Wiper Blade *6 month warranty* Compatible with all U-Hook Type (One Piece)",
+            "sales": "312 sold/month",
+            "links": "/100-ORIGINAL-Bosch-Advantage-Wiper-Blade-*6-month-warranty*-Compatible-with-all-U-Hook-Type-(One-Piece)-i.165291595.2591331274"
+        }, {
+            "order": 7,
+            "value": ["16.90"],
+            "product": "Perodua Axia Car Windscreen Wiper Size 21\" / 14\" - Bosch Advantage BA2114 (1 Pair)",
+            "sales": "199 sold/month",
+            "links": "/Perodua-Axia-Car-Windscreen-Wiper-Size-21-14-Bosch-Advantage-BA2114-(1-Pair)-i.115939874.2077539346"
+        }, {
+            "order": 8,
+            "value": ["14.90"],
+            "product": "Perodua Myvi Lagi Best / Icon Year 2011 - 2017 Car Windscreen Wiper 21\" / 17\" - Bosch Advantage BA2117",
+            "sales": "179 sold/month",
+            "links": "/Perodua-Myvi-Lagi-Best-Icon-Year-2011-2017-Car-Windscreen-Wiper-21-17-Bosch-Advantage-BA2117-i.115939874.2285869960"
+        }, {
+            "order": 9,
+            "value": ["15.26"],
+            "product": "Proton Saga BLM / FL / FLX / VVT Car Windscreen Wiper Size 22\" / 17\" (1 Pair) - Bosch Advantage BA2217",
+            "sales": "166 sold/month",
+            "links": "/Proton-Saga-BLM-FL-FLX-VVT-Car-Windscreen-Wiper-Size-22-17-(1-Pair)-Bosch-Advantage-BA2217-i.115939874.2285882088"
+        }, {
+            "order": 10,
+            "value": ["6.90", "17.50"],
+            "product": "Bosch Advantage Wiper Blade - Compatible with all U-Hook Type (One Piece) myvi kancil axia wira alza bezza waja",
+            "sales": "155 sold/month",
+            "links": "/Bosch-Advantage-Wiper-Blade-Compatible-with-all-U-Hook-Type-(One-Piece)-myvi-kancil-axia-wira-alza-bezza-waja-i.30232128.1473409236"
+        }, {
+            "order": 11,
+            "value": ["18.90"],
+            "product": "Honda City Car Year 2014 To Present Windscreen Wiper Size 26\" & 14\" (1 Pair) - Bosch Advantage BA2614",
+            "sales": "139 sold/month",
+            "links": "/Honda-City-Car-Year-2014-To-Present-Windscreen-Wiper-Size-26-14-(1-Pair)-Bosch-Advantage-BA2614-i.115939874.2077163213"
+        }, {
+            "order": 12,
+            "value": ["14.80", "20.40"],
+            "product": "Bosch Clear Advantage Wiper - Compatible with all U-Hook Type (One Piece) myvi kancil axia wira alza bezza waja",
+            "sales": "131 sold/month",
+            "links": "/Bosch-Clear-Advantage-Wiper-Compatible-with-all-U-Hook-Type-(One-Piece)-myvi-kancil-axia-wira-alza-bezza-waja-i.30232128.1473521561"
+        }, {
+            "order": 13,
+            "value": ["13.50", "19.50"],
+            "product": "Bosch Clear Advantage Wiper - Compatible With All U-Hook Type (One Piece)",
+            "sales": "114 sold/month",
+            "links": "/Bosch-Clear-Advantage-Wiper-Compatible-With-All-U-Hook-Type-(One-Piece)-i.36592523.1803259123"
+        }, {
+            "order": 14,
+            "value": ["14.44"],
+            "product": "Perodua Viva Car Windscreen Wiper Size 21\" / 12\" (1 Pair) - Bosch Advantage BA2112",
+            "sales": "112 sold/month",
+            "links": "/Perodua-Viva-Car-Windscreen-Wiper-Size-21-12-(1-Pair)-Bosch-Advantage-BA2112-i.115939874.2077405683"
+        }, {
+            "order": 15,
+            "value": ["8.63", "19.30"],
+            "product": "Bosch Clear Advantage Soft Wiper Blade BCA ( Compatible with all U-Hook Type )",
+            "sales": "101 sold/month",
+            "links": "/Bosch-Clear-Advantage-Soft-Wiper-Blade-BCA-(-Compatible-with-all-U-Hook-Type-)-i.91836532.2314882624"
+        }, {
+            "order": 16,
+            "value": ["16.90"],
+            "product": "Perodua Bezza Car Windscreen Windshield Wiper Size 21\" / 14\" - Bosch Advantage BA2114",
+            "sales": "99 sold/month",
+            "links": "/Perodua-Bezza-Car-Windscreen-Windshield-Wiper-Size-21-14-Bosch-Advantage-BA2114-i.115939874.4801485368"
+        }, {
+            "order": 17,
+            "value": ["6.90", "15.65"],
+            "product": "Bosch Advantage Car Windshield Wiper Blade U-Hook Type (1 Unit) Proton / Perodua / Honda / Toyota / Nissan / Mazda / Kia",
+            "sales": "100 sold/month",
+            "links": "/Bosch-Advantage-Car-Windshield-Wiper-Blade-U-Hook-Type-(1-Unit)-Proton-Perodua-Honda-Toyota-Nissan-Mazda-Kia-i.68519741.4220236927"
+        }, {
+            "order": 18,
+            "value": ["14.90"],
+            "product": "Proton Wira Car Windscreen Wiper Size 20\" / 17\" - Bosch Advantage BA2017",
+            "sales": "88 sold/month",
+            "links": "/Proton-Wira-Car-Windscreen-Wiper-Size-20-17-Bosch-Advantage-BA2017-i.115939874.2078809757"
+        }, {
+            "order": 19,
+            "value": ["13.90"],
+            "product": "BOSCH PERODUA MYVI ADVANTAGE WIPER BLADE (16''+20",
+            "sales": "87 sold/month",
+            "links": "/BOSCH-PERODUA-MYVI-ADVANTAGE-WIPER-BLADE-(16''-20-i.169430212.2714471427"
+        }, {
+            "order": 20,
+            "value": ["8.00", "14.50"],
+            "product": "BOSCH WIPER BLADE ADVANTAGE CAR WINDSHIELD WIPER U-Hook TYPE PERODUA TOYOTA PROTON NISSAN HYUNDAI CAR",
+            "sales": "86 sold/month",
+            "links": "/BOSCH-WIPER-BLADE-ADVANTAGE-CAR-WINDSHIELD-WIPER-U-Hook-TYPE-PERODUA-TOYOTA-PROTON-NISSAN-HYUNDAI-CAR-i.129541234.1967701068"
+        }, {
+            "order": 21,
+            "value": ["6.80", "12.00"],
+            "product": "BOSCH WIPER ADVANTAGE WIPER SINGLE SIZE 12,14,16,17,18,19,20,21,22,24,26 U-Hook Type",
+            "sales": "84 sold/month",
+            "links": "/BOSCH-WIPER-ADVANTAGE-WIPER-SINGLE-SIZE-12-14-16-17-18-19-20-21-22-24-26-U-Hook-Type-i.81866858.2004746451"
+        }, {
+            "order": 22,
+            "value": ["14.18", "16.22"],
+            "product": "BOSCH CLEAR ADVANTAGE WIPER BLADE MYVI ALZA SAGA BLM EXORA VIOS CITY JAZZ CIVIC ACCORD CAMRY WISH INNOVA HILUX",
+            "sales": "80 sold/month",
+            "links": "/BOSCH-CLEAR-ADVANTAGE-WIPER-BLADE-MYVI-ALZA-SAGA-BLM-EXORA-VIOS-CITY-JAZZ-CIVIC-ACCORD-CAMRY-WISH-INNOVA-HILUX-i.169430212.5045208185"
+        }, {
+            "order": 23,
+            "value": ["14.88"],
+            "product": "Perodua Alza Car Windshield Wiper Blade 24\" / 16\" Bosch Advantage BA2416",
+            "sales": "71 sold/month",
+            "links": "/Perodua-Alza-Car-Windshield-Wiper-Blade-24-16-Bosch-Advantage-BA2416-i.115939874.2082222275"
+        }, {
+            "order": 24,
+            "value": ["6.89", "12.49"],
+            "product": "BOSCH Advantage Wiper Blade (BA12-BA26) PROTON, PERODUA, TOYOTA, HONDA, NISSAN, SUZUKI, FORD, MAZDA, KIA, HYUNDAI",
+            "sales": "67 sold/month",
+            "links": "/BOSCH-Advantage-Wiper-Blade-(BA12-BA26)-PROTON-PERODUA-TOYOTA-HONDA-NISSAN-SUZUKI-FORD-MAZDA-KIA-HYUNDAI-i.143678838.6009025134"
+        }, {
+            "order": 25,
+            "value": ["6.90", "12.00"],
+            "product": "Bosch Advantage Wiper Blade - Compatible with all U-Hook Type",
+            "sales": "93 sold/month",
+            "links": "/Bosch-Advantage-Wiper-Blade-Compatible-with-all-U-Hook-Type-i.168745540.2700935644"
+        }, {
+            "order": 26,
+            "value": ["10.37"],
+            "product": "Myvi Old / Avanza Bosch Advantage Wiper Blade Set 20\" / 16\"",
+            "sales": "65 sold/month",
+            "links": "/Myvi-Old-Avanza-Bosch-Advantage-Wiper-Blade-Set-20-16--i.165449195.2657409558"
+        }, {
+            "order": 27,
+            "value": ["14.50"],
+            "product": "BOSCH 1SET-U HOOK BA2114 AXIA/BEZZA/ALMERA WIPER",
+            "sales": "62 sold/month",
+            "links": "/BOSCH-1SET-U-HOOK-BA2114-AXIA-BEZZA-ALMERA-WIPER-i.85944027.2025383852"
+        }, {
+            "order": 28,
+            "value": ["13.90"],
+            "product": "Perodua Myvi 2005 - 2010 Windshield Wiper Blade 20\" / 16\" Bosch Advantage BA2016",
+            "sales": "61 sold/month",
+            "links": "/Perodua-Myvi-2005-2010-Windshield-Wiper-Blade-20-16-Bosch-Advantage-BA2016-i.115939874.2077209326"
+        }, {
+            "order": 29,
+            "value": ["33.00", "39.30"],
+            "product": "Bosch Aerotwin Wiper Blade Genuine Bosch Malaysia (Sizes:14\",16\",17\",18\",19\",20\",21\",22\",24\",26\",28\")",
+            "sales": "59 sold/month",
+            "links": "/Bosch-Aerotwin-Wiper-Blade-Genuine-Bosch-Malaysia-(Sizes-14-16-17-18-19-20-21-22-24-26-28-)-i.36592523.2672232783"
+        }, {
+            "order": 30,
+            "value": ["11.00", "16.67"],
+            "product": "Bosch Advantage Wiper Blade Set - Compatible With All U-Hook Type (Two Pieces)",
+            "sales": "58 sold/month",
+            "links": "/Bosch-Advantage-Wiper-Blade-Set-Compatible-With-All-U-Hook-Type-(Two-Pieces)-i.165449195.5404474715"
+        }, {
+            "order": 31,
+            "value": ["14.90"],
+            "product": "Perodua Kancil 94 - 2013 Windshield Wiper Blade 18\" / 16\" Bosch Advantage BA1816",
+            "sales": "48 sold/month",
+            "links": "/Perodua-Kancil-94-2013-Windshield-Wiper-Blade-18-16-Bosch-Advantage-BA1816-i.115939874.2077377422"
+        }, {
+            "order": 32,
+            "value": ["7.00", "11.90"],
+            "product": "BOSCH ADVANTAGE CAR WIPER BLADE COMPATIBLE FOR ALL U-HOOK TYPE ALL SIZES - 100 % ORIGINAL ( 200000 Wipes Cycles) 1 PC",
+            "sales": "48 sold/month",
+            "links": "/BOSCH-ADVANTAGE-CAR-WIPER-BLADE-COMPATIBLE-FOR-ALL-U-HOOK-TYPE-ALL-SIZES-100-ORIGINAL-(-200000-Wipes-Cycles)-1-PC-i.9529318.4509887936"
+        }, {
+            "order": 33,
+            "value": ["12.61"],
+            "product": "Perodua Myvi 2005-2017 - Bosch Advantage Wiper (20inch + 16inch) - BA2016 SET Wiper",
+            "sales": "48 sold/month",
+            "links": "/Perodua-Myvi-2005-2017-Bosch-Advantage-Wiper-(20inch-16inch)-BA2016-SET-Wiper-i.91836532.1585551486"
+        }, {
+            "order": 34,
+            "value": ["16.90"],
+            "product": "Proton Persona Car Year 2007 - 2016 Windscreen Wiper Blade 21\" / 19\" Bosch Advantage BA2119",
+            "sales": "47 sold/month",
+            "links": "/Proton-Persona-Car-Year-2007-2016-Windscreen-Wiper-Blade-21-19-Bosch-Advantage-BA2119-i.115939874.4710600092"
+        }, {
+            "order": 35,
+            "value": ["16.90"],
+            "product": "Perodua Myvi Lagi Best/ Myvi Standard/ Myvi SE Model Car Windscreen BOSCH Rear Wiper Blade 14”- H352",
+            "sales": "46 sold/month",
+            "links": "/Perodua-Myvi-Lagi-Best-Myvi-Standard-Myvi-SE-Model-Car-Windscreen-BOSCH-Rear-Wiper-Blade-14”-H352-i.68519741.7523518464"
+        }, {
+            "order": 36,
+            "value": ["12.20", "15.40"],
+            "product": "Bosch Clear Advantage Soft Wiper Blade BCA14-26 (U hook)",
+            "sales": "45 sold/month",
+            "links": "/Bosch-Clear-Advantage-Soft-Wiper-Blade-BCA14-26-(U-hook)-i.223367235.4942230773"
+        }, {
+            "order": 37,
+            "value": ["12.80"],
+            "product": "BOSCH WIPER BA16 + 18 ADVANTAGE WIPER BLADE KANCIL,KELISA",
+            "sales": "42 sold/month",
+            "links": "/BOSCH-WIPER-BA16-18-ADVANTAGE-WIPER-BLADE-KANCIL-KELISA-i.81866858.2004524359"
+        }, {
+            "order": 38,
+            "value": ["17.90"],
+            "product": "Honda City Year 2002 - 2013 Windscreen Wiper Blade 24\" / 14\" Bosch Advantage BA2414",
+            "sales": "42 sold/month",
+            "links": "/Honda-City-Year-2002-2013-Windscreen-Wiper-Blade-24-14-Bosch-Advantage-BA2414-i.115939874.3511422343"
+        }, {
+            "order": 39,
+            "value": ["18.90"],
+            "product": "Honda Jazz Year 2014 To Present Car Front Windscreen U Hook Wiper Blade 26 & 14 Inch - Bosch Advantage BA2614 Wiper",
+            "sales": "42 sold/month",
+            "links": "/Honda-Jazz-Year-2014-To-Present-Car-Front-Windscreen-U-Hook-Wiper-Blade-26-14-Inch-Bosch-Advantage-BA2614-Wiper-i.115939874.4636121750"
+        }, {
+            "order": 40,
+            "value": ["17.90"],
+            "product": "Toyota Vios Car 2007+ Windshield Wiper Blade 24\" / 14\" Bosch Advantage BA2414",
+            "sales": "42 sold/month",
+            "links": "/Toyota-Vios-Car-2007-Windshield-Wiper-Blade-24-14-Bosch-Advantage-BA2414-i.115939874.2077577532"
+        }, {
+            "order": 41,
+            "value": ["14.80"],
+            "product": "**100% ORIGINAL** Bosch Advantage Wiper Blade Set (U HOOK) Wira / Putra / Satria (20\" + 17\") - 1box 2pcs",
+            "sales": "41 sold/month",
+            "links": "/**100-ORIGINAL**-Bosch-Advantage-Wiper-Blade-Set-(U-HOOK)-Wira-Putra-Satria-(20-17-)-1box-2pcs-i.167031082.2834384432"
+        }, {
+            "order": 42,
+            "value": ["15.00"],
+            "product": "BOSCH 1PAIR-U HOOK BA2416 ALZA/PREVE/EXORA WIPER",
+            "sales": "37 sold/month",
+            "links": "/BOSCH-1PAIR-U-HOOK-BA2416-ALZA-PREVE-EXORA-WIPER-i.231678979.5229516658"
+        }, {
+            "order": 43,
+            "value": ["13.90"],
+            "product": "Proton Iswara Car Windshield Wiper Blade 19\" / 18\" Bosch Advantage BA1918",
+            "sales": "35 sold/month",
+            "links": "/Proton-Iswara-Car-Windshield-Wiper-Blade-19-18-Bosch-Advantage-BA1918-i.115939874.2077362898"
+        }, {
+            "order": 44,
+            "value": ["16.50"],
+            "product": "BOSCH 1PAIR-U HOOK BA2416 ALZA/PREVE/EXORA WIPER",
+            "sales": "32 sold/month",
+            "links": "/BOSCH-1PAIR-U-HOOK-BA2416-ALZA-PREVE-EXORA-WIPER-i.85944027.2025383189"
+        }, {
+            "order": 45,
+            "value": ["17.90"],
+            "product": "PERODUA VIVA 2007-2015 PREMIUM WIPER BLADE",
+            "sales": "",
+            "links": "/PERODUA-VIVA-2007-2015-PREMIUM-WIPER-BLADE-i.403411419.7184098347"
+        }, {
+            "order": 46,
+            "value": ["3.19"],
+            "product": "Nano Soft Rubber Wipers Car Wiper Blade Boneless Mitsubishi Kia Perodua Nissan Suzuki Honda Mazda Toyota Proton Hyundai",
+            "sales": "204 sold/month",
+            "links": "/Nano-Soft-Rubber-Wipers-Car-Wiper-Blade-Boneless-Mitsubishi-Kia-Perodua-Nissan-Suzuki-Honda-Mazda-Toyota-Proton-Hyundai-i.199642021.4613738366"
+        }, {
+            "order": 47,
+            "value": ["12.50", "25.00"],
+            "product": "ORIGINAL HKS PRO SILICONE WIPER - WHITE / GREY EDITION",
+            "sales": "192 sold/month",
+            "links": "/ORIGINAL-HKS-PRO-SILICONE-WIPER-WHITE-GREY-EDITION-i.147434123.2837224383"
+        }, {
+            "order": 48,
+            "value": ["14.35", "28.35"],
+            "product": "TOYOTA LEXUS Wipers VIGO Estima Solara RAV4 CAMRY VIOS ALTIS WISH Vellfire Fortuner YARIS Avanza REVO ISUZU DMAX INNOVA Wiper",
+            "sales": "44 sold/month",
+            "links": "/TOYOTA-LEXUS-Wipers-VIGO-Estima-Solara-RAV4-CAMRY-VIOS-ALTIS-WISH-Vellfire-Fortuner-YARIS-Avanza-REVO-ISUZU-DMAX-INNOVA-Wiper-i.152908917.2328294961"
+        }, {
+            "order": 49,
+            "value": ["12.00"],
+            "product": "Premium Silicone Car Wiper Blade -12 Months Warranty, TWIPE Wiper Kereta, Toyota Honda Nissan Perodua Proton Mazda",
+            "sales": "55 sold/month",
+            "links": "/Premium-Silicone-Car-Wiper-Blade-12-Months-Warranty-TWIPE-Wiper-Kereta-Toyota-Honda-Nissan-Perodua-Proton-Mazda-i.19774098.4402396754"
+        }, {
+            "order": 0,
+            "value": ["270.00"],
+            "product": "Mercedes Benz C-Class Cabriolet (C205) 2016> Mita Super silicon wiper 22\"/22\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-C-Class-Cabriolet-(C205)-2016-Mita-Super-silicon-wiper-22-22--i.170086019.2886293446"
+        }, {
+            "order": 1,
+            "value": ["270.00"],
+            "product": "Mercedes Benz CLA-Class (X117) 2015> Mita Super silicon wiper 19\"/24\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-CLA-Class-(X117)-2015-Mita-Super-silicon-wiper-19-24--i.170086019.2886825926"
+        }, {
+            "order": 2,
+            "value": ["270.00"],
+            "product": "Mercedes Benz C-Class Coupe (C205) 2015> Mita Super silicon wiper 22\"/22\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-C-Class-Coupe-(C205)-2015-Mita-Super-silicon-wiper-22-22--i.170086019.2886293141"
+        }, {
+            "order": 3,
+            "value": ["270.00"],
+            "product": "Mercedes Benz E-Class (C238) 2017> Mita Super silicon wiper 22\"/24\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-E-Class-(C238)-2017-Mita-Super-silicon-wiper-22-24--i.170086019.2886682603"
+        }, {
+            "order": 4,
+            "value": ["270.00"],
+            "product": "Mercedes Benz A-Class (W176) 2015> Mita Super silicon wiper 19\"/24\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-A-Class-(W176)-2015-Mita-Super-silicon-wiper-19-24--i.170086019.2886669844"
+        }, {
+            "order": 5,
+            "value": ["15.00"],
+            "product": "Perodua Axia Bezza Nissan Almera - BA2114 set (21inch + 14inch) - Bosch Advantage Wiper set",
+            "sales": "31 sold/month",
+            "links": "/Perodua-Axia-Bezza-Nissan-Almera-BA2114-set-(21inch-14inch)-Bosch-Advantage-Wiper-set-i.91836532.1585551491"
+        }, {
+            "order": 6,
+            "value": ["13.16"],
+            "product": "BOSCH PROTON SAGA ISWARA ADVANTAGE WIPER BLADE (18''+19ʺ) PERFECT FITMENT",
+            "sales": "31 sold/month",
+            "links": "/BOSCH-PROTON-SAGA-ISWARA-ADVANTAGE-WIPER-BLADE-(18''-19ʺ)-PERFECT-FITMENT-i.169430212.2714560929"
+        }, {
+            "order": 7,
+            "value": ["16.90"],
+            "product": "Proton Waja Car Windshield Wiper Blade 21\" / 19\" Bosch Advantage BA2119",
+            "sales": "30 sold/month",
+            "links": "/Proton-Waja-Car-Windshield-Wiper-Blade-21-19-Bosch-Advantage-BA2119-i.115939874.2077451853"
+        }, {
+            "order": 8,
+            "value": ["31.04", "44.62"],
+            "product": "Bosch BBA Aerotwin Wiper Blade ( Compatible with all U-Hook Type )",
+            "sales": "30 sold/month",
+            "links": "/Bosch-BBA-Aerotwin-Wiper-Blade-(-Compatible-with-all-U-Hook-Type-)-i.91836532.2479131772"
+        }, {
+            "order": 9,
+            "value": ["14.50"],
+            "product": "Proton Waja / Gen2 / Persona Bosch Advantage Wiper Blade Set 21\" / 19\" 1SET",
+            "sales": "28 sold/month",
+            "links": "/Proton-Waja-Gen2-Persona-Bosch-Advantage-Wiper-Blade-Set-21-19-1SET-i.91836532.1585519887"
+        }, {
+            "order": 10,
+            "value": ["40.00", "45.00"],
+            "product": "Bosch Wiper Blade Chrome Wiper Daihatsu Kcar Perodua Proton Toyota 14” - 26” Inch Universal Chrome Wiper Silver Chrome",
+            "sales": "28 sold/month",
+            "links": "/Bosch-Wiper-Blade-Chrome-Wiper-Daihatsu-Kcar-Perodua-Proton-Toyota-14”-26”-Inch-Universal-Chrome-Wiper-Silver-Chrome-i.77079951.3433732665"
+        }, {
+            "order": 11,
+            "value": ["15.90"],
+            "product": "BOSCH SAGA BLM FLX ADVANTAGE WIPER BLADE (17''+22",
+            "sales": "28 sold/month",
+            "links": "/BOSCH-SAGA-BLM-FLX-ADVANTAGE-WIPER-BLADE-(17''-22-i.169430212.2714535789"
+        }, {
+            "order": 12,
+            "value": ["9.50", "45.00"],
+            "product": "[ORIGINAL] Perodua Bezza 2016 - Present Bosch Advantage U-Hook Wiper Blade Windscreen (1SET)",
+            "sales": "25 sold/month",
+            "links": "/-ORIGINAL-Perodua-Bezza-2016-Present-Bosch-Advantage-U-Hook-Wiper-Blade-Windscreen-(1SET)-i.341281774.6164780725"
+        }, {
+            "order": 13,
+            "value": ["12.50"],
+            "product": "BOSCH 1PAIR-U HOOK BA1816 KANCIL/KELISA WIPER",
+            "sales": "24 sold/month",
+            "links": "/BOSCH-1PAIR-U-HOOK-BA1816-KANCIL-KELISA-WIPER-i.85944027.2025383205"
+        }, {
+            "order": 14,
+            "value": ["16.90"],
+            "product": "Toyota Hilux Vigo Car Front Windscreen / Windshield Wiper Blade Size 21\" & 19\" - Bosch Advantage BA2119",
+            "sales": "24 sold/month",
+            "links": "/Toyota-Hilux-Vigo-Car-Front-Windscreen-Windshield-Wiper-Blade-Size-21-19-Bosch-Advantage-BA2119-i.115939874.2077228457"
+        }, {
+            "order": 15,
+            "value": ["16.90"],
+            "product": "Nissan Almera Car Windshield Wiper Blade 21\" / 14\" Bosch Advantage BA2114",
+            "sales": "23 sold/month",
+            "links": "/Nissan-Almera-Car-Windshield-Wiper-Blade-21-14-Bosch-Advantage-BA2114-i.115939874.2077282472"
+        }, {
+            "order": 16,
+            "value": ["17.90"],
+            "product": "Proton Exora Car Windshield Wiper Blade 24\" / 16\" Bosch Advantage BA2416",
+            "sales": "22 sold/month",
+            "links": "/Proton-Exora-Car-Windshield-Wiper-Blade-24-16-Bosch-Advantage-BA2416-i.115939874.2077144264"
+        }, {
+            "order": 17,
+            "value": ["14.90"],
+            "product": "Perodua Kenari Car Windshield Wiper Blade 20\" / 17\" Bosch Advantage BA2017",
+            "sales": "20 sold/month",
+            "links": "/Perodua-Kenari-Car-Windshield-Wiper-Blade-20-17-Bosch-Advantage-BA2017-i.115939874.2077193947"
+        }, {
+            "order": 18,
+            "value": ["15.20"],
+            "product": "BOSCH PERODUA AXIA KEMBARA ADVANTAGE WIPER BLADE (14''+20ʺ) PERFECT FITMENT",
+            "sales": "20 sold/month",
+            "links": "/BOSCH-PERODUA-AXIA-KEMBARA-ADVANTAGE-WIPER-BLADE-(14''-20ʺ)-PERFECT-FITMENT-i.169430212.2714564958"
+        }, {
+            "order": 19,
+            "value": ["78.00"],
+            "product": "Wiper Blade Chrome Bosch Perodua Myvi / Axia / Viva / Kancil / Kelisa / Kenari / Alza / Bezza / Kembara Wiper krom crom",
+            "sales": "20 sold/month",
+            "links": "/Wiper-Blade-Chrome-Bosch-Perodua-Myvi-Axia-Viva-Kancil-Kelisa-Kenari-Alza-Bezza-Kembara-Wiper-krom-crom-i.217542443.6117915524"
+        }, {
+            "order": 20,
+            "value": ["7.30", "18.50"],
+            "product": "Bosch Advantage Wiper Blade - Compatible with all U-Hook Type ( One Piece ) BA Wiper",
+            "sales": "50 sold/month",
+            "links": "/Bosch-Advantage-Wiper-Blade-Compatible-with-all-U-Hook-Type-(-One-Piece-)-BA-Wiper-i.228962357.4337514678"
+        }, {
+            "order": 21,
+            "value": ["13.77"],
+            "product": "BOSCH PERODUA BEZZA ADVANTAGE WIPER BLADE (14''+21ʺ) PERFECT FITMENT",
+            "sales": "20 sold/month",
+            "links": "/BOSCH-PERODUA-BEZZA-ADVANTAGE-WIPER-BLADE-(14''-21ʺ)-PERFECT-FITMENT-i.169430212.2714580847"
+        }, {
+            "order": 22,
+            "value": ["15.99"],
+            "product": "Proton Saga 2016 - 2020 / Mazda 2 2015 - 2019 / Nissan Sylphy (22\" / 17\") Bosch Advantage Windshield Wiper Blades",
+            "sales": "19 sold/month",
+            "links": "/Proton-Saga-2016-2020-Mazda-2-2015-2019-Nissan-Sylphy-(22-17-)-Bosch-Advantage-Windshield-Wiper-Blades-i.17868449.3108510152"
+        }, {
+            "order": 23,
+            "value": ["14.90"],
+            "product": "Perodua Kelisa 01 - 2013 Windshield Wiper Blade 18\" / 16\" Bosch Advantage BA1816",
+            "sales": "18 sold/month",
+            "links": "/Perodua-Kelisa-01-2013-Windshield-Wiper-Blade-18-16-Bosch-Advantage-BA1816-i.115939874.2078836158"
+        }, {
+            "order": 24,
+            "value": ["9.50", "45.00"],
+            "product": "[ORIGINAL] Proton Wira 1993 Bosch Advantage U-Hook Wiper Blade Windscreen (1SET)",
+            "sales": "18 sold/month",
+            "links": "/-ORIGINAL-Proton-Wira-1993-Bosch-Advantage-U-Hook-Wiper-Blade-Windscreen-(1SET)-i.341281774.7164774781"
+        }, {
+            "order": 25,
+            "value": ["15.50"],
+            "product": "Perodua Viva Bosch Advantage Wiper Blade Set 21\" / 12\" 1set",
+            "sales": "17 sold/month",
+            "links": "/Perodua-Viva-Bosch-Advantage-Wiper-Blade-Set-21-12-1set-i.91836532.1585551669"
+        }, {
+            "order": 26,
+            "value": ["13.50"],
+            "product": "Perodua Kancil / Kelisa / Kenari Bosch Advantage Wiper Blade Set 18\" / 16\" Original 1SET",
+            "sales": "17 sold/month",
+            "links": "/Perodua-Kancil-Kelisa-Kenari-Bosch-Advantage-Wiper-Blade-Set-18-16-Original-1SET-i.91836532.1585567534"
+        }, {
+            "order": 27,
+            "value": ["14.80"],
+            "product": "**100% ORIGINAL**Bosch Advantage Wiper Set Proton Waja,Mitsubishi Triton,Hilux Vigo (U-Hook Type) 21\"/19\" -1box 2pcs",
+            "sales": "17 sold/month",
+            "links": "/**100-ORIGINAL**Bosch-Advantage-Wiper-Set-Proton-Waja-Mitsubishi-Triton-Hilux-Vigo-(U-Hook-Type)-21-19-1box-2pcs-i.167031082.2834068263"
+        }, {
+            "order": 28,
+            "value": ["12.50", "17.60"],
+            "product": "**100% ORIGINAL** BOSCH Clear Advantage Soft Wiper Blade BCA ( Compatible with all U-Hook Type ) - 1pcs",
+            "sales": "17 sold/month",
+            "links": "/**100-ORIGINAL**-BOSCH-Clear-Advantage-Soft-Wiper-Blade-BCA-(-Compatible-with-all-U-Hook-Type-)-1pcs-i.167031082.4807659047"
+        }, {
+            "order": 29,
+            "value": ["31.00", "45.00"],
+            "product": "Bosch BBA Aerotwin Wiper Blade ( Compatible with all U-Hook Type )",
+            "sales": "17 sold/month",
+            "links": "/Bosch-BBA-Aerotwin-Wiper-Blade-(-Compatible-with-all-U-Hook-Type-)-i.231678979.6747502607"
+        }, {
+            "order": 30,
+            "value": ["9.51", "19.40"],
+            "product": "Bosch Advantage Wiper Blades - Compatible with all U-Hook Type (One Piece)",
+            "sales": "17 sold/month",
+            "links": "/Bosch-Advantage-Wiper-Blades-Compatible-with-all-U-Hook-Type-(One-Piece)-i.125134833.6842785228"
+        }, {
+            "order": 31,
+            "value": ["17.90"],
+            "product": "Nissan Grand Livina Car Windshield Wiper Blade 24\" / 14\" Bosch Advantage BA2414",
+            "sales": "16 sold/month",
+            "links": "/Nissan-Grand-Livina-Car-Windshield-Wiper-Blade-24-14-Bosch-Advantage-BA2414-i.115939874.2079080429"
+        }, {
+            "order": 32,
+            "value": ["17.90"],
+            "product": "Proton Preve Car Front Windshield / Windscreen Wiper Size 24\" / 16\" Inch (1 Pair) - Bosch Advantage BA2416",
+            "sales": "16 sold/month",
+            "links": "/Proton-Preve-Car-Front-Windshield-Windscreen-Wiper-Size-24-16-Inch-(1-Pair)-Bosch-Advantage-BA2416-i.115939874.2079179001"
+        }, {
+            "order": 33,
+            "value": ["16.00"],
+            "product": "BOSCH H307-12 REAR WIPER MIRAGE,VITARA,ERTIGA,FORTUNER,INNOVA,ESTIMA,RUSH,YARIS,WISH,ALZA,AXIA ,NAUTICA H307",
+            "sales": "16 sold/month",
+            "links": "/BOSCH-H307-12-REAR-WIPER-MIRAGE-VITARA-ERTIGA-FORTUNER-INNOVA-ESTIMA-RUSH-YARIS-WISH-ALZA-AXIA-NAUTICA-H307-i.81866858.4413722985"
+        }, {
+            "order": 34,
+            "value": ["26.91"],
+            "product": "Bosch Advantage U Hook Wiper Set for Perodua Myvi LagiBest (21\"/17\")",
+            "sales": "16 sold/month",
+            "links": "/Bosch-Advantage-U-Hook-Wiper-Set-for-Perodua-Myvi-LagiBest-(21-17-)-i.277991182.3343964850"
+        }, {
+            "order": 35,
+            "value": ["23.80"],
+            "product": "Perodua Myvi 1st Generation / Lagi Best / Icon Year 2005-2017 Car Windscreen Rear Wiper (Belakang) 14” Bosch Rear H352",
+            "sales": "16 sold/month",
+            "links": "/Perodua-Myvi-1st-Generation-Lagi-Best-Icon-Year-2005-2017-Car-Windscreen-Rear-Wiper-(Belakang)-14”-Bosch-Rear-H352-i.115939874.6167937579"
+        }, {
+            "order": 36,
+            "value": ["9.50", "45.00"],
+            "product": "[ORIGINAL] Perodua Alza 2009 - 2019 Bosch Advantage U-Hook Wiper Blade Windscreen (1SET)",
+            "sales": "16 sold/month",
+            "links": "/-ORIGINAL-Perodua-Alza-2009-2019-Bosch-Advantage-U-Hook-Wiper-Blade-Windscreen-(1SET)-i.341281774.6664772497"
+        }, {
+            "order": 37,
+            "value": ["23.80"],
+            "product": "Honda Jazz Car Windscreen Rear Wiper Blade 14\" Bosch Rear H354",
+            "sales": "16 sold/month",
+            "links": "/Honda-Jazz-Car-Windscreen-Rear-Wiper-Blade-14-Bosch-Rear-H354-i.115939874.2215419562"
+        }, {
+            "order": 38,
+            "value": ["19.90", "22.90"],
+            "product": "Wiper Set BOSCH Advantage Myvi/Kancil/Viva/Wira/Alza Car Windscreen Wiper (Pair)",
+            "sales": "15 sold/month",
+            "links": "/Wiper-Set-BOSCH-Advantage-Myvi-Kancil-Viva-Wira-Alza-Car-Windscreen-Wiper-(Pair)-i.32065683.5352913708"
+        }, {
+            "order": 39,
+            "value": ["9.50", "45.00"],
+            "product": "[ORIGINAL] Perodua Viva 2007 Bosch Advantage U-Hook Wiper Blade Windscreen (1SET)",
+            "sales": "15 sold/month",
+            "links": "/-ORIGINAL-Perodua-Viva-2007-Bosch-Advantage-U-Hook-Wiper-Blade-Windscreen-(1SET)-i.341281774.7464785653"
+        }, {
+            "order": 40,
+            "value": ["37.50", "42.50"],
+            "product": "Bosch Aerotwin Plus Wiper Blade With Innovative Adapter (Sizes:13\",15\",16\",17\",18\",19\",20\",21\",22\",23\",24\",26\",28\")",
+            "sales": "15 sold/month",
+            "links": "/Bosch-Aerotwin-Plus-Wiper-Blade-With-Innovative-Adapter-(Sizes-13-15-16-17-18-19-20-21-22-23-24-26-28-)-i.36592523.2672232919"
+        }, {
+            "order": 41,
+            "value": ["16.90"],
+            "product": "Proton Satria Neo Car Windshield Wiper Blade 21\" / 19\" Bosch Advantage BA2119",
+            "sales": "15 sold/month",
+            "links": "/Proton-Satria-Neo-Car-Windshield-Wiper-Blade-21-19-Bosch-Advantage-BA2119-i.115939874.2077094045"
+        }, {
+            "order": 42,
+            "value": ["15.90"],
+            "product": "BOSCH WIPER BA14 + 24 ADVANTAGE WIPER BLADE JAZZ,CITY,STREAM,VIOS,YARIS,LIVINA",
+            "sales": "14 sold/month",
+            "links": "/BOSCH-WIPER-BA14-24-ADVANTAGE-WIPER-BLADE-JAZZ-CITY-STREAM-VIOS-YARIS-LIVINA-i.81866858.2004479726"
+        }, {
+            "order": 43,
+            "value": ["59.90"],
+            "product": "Bosch Aerotwins Wiper Blade ( Set ) For Perodua Myvi Year 2018 - Present ( 22\"/16\" ) ( 100% Genuine Bosch )",
+            "sales": "14 sold/month",
+            "links": "/Bosch-Aerotwins-Wiper-Blade-(-Set-)-For-Perodua-Myvi-Year-2018-Present-(-22-16-)-(-100-Genuine-Bosch-)-i.302871254.5271103837"
+        }, {
+            "order": 44,
+            "value": ["26.91"],
+            "product": "Bosch Advantage U Hook Wiper Set for Nissan Almera N17 (21\"/14\")",
+            "sales": "14 sold/month",
+            "links": "/Bosch-Advantage-U-Hook-Wiper-Set-for-Nissan-Almera-N17-(21-14-)-i.277991182.5743424319"
+        }, {
+            "order": 45,
+            "value": ["270.00"],
+            "product": "Mercedes Benz C-Class (W205) 2014> Mita Super silicon wiper 22\"/22\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-C-Class-(W205)-2014-Mita-Super-silicon-wiper-22-22--i.170086019.2886639677"
+        }, {
+            "order": 46,
+            "value": ["270.00"],
+            "product": "Mercedes Benz E-Class All-Terrain (C213) 2016> Mita Super silicon wiper 22\"/24\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-E-Class-All-Terrain-(C213)-2016-Mita-Super-silicon-wiper-22-24--i.170086019.2886322716"
+        }, {
+            "order": 47,
+            "value": ["270.00"],
+            "product": "Mercedes Benz B-Class (W246) 2015> Mita Super silicon wiper 19\"/26\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-B-Class-(W246)-2015-Mita-Super-silicon-wiper-19-26--i.170086019.2886239912"
+        }, {
+            "order": 48,
+            "value": ["270.00"],
+            "product": "Mercedes Benz GLC-Class (X253) 2015> Mita Super silicon wiper 22\"/22\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-GLC-Class-(X253)-2015-Mita-Super-silicon-wiper-22-22--i.170086019.2886845530"
+        }, {
+            "order": 49,
+            "value": ["270.00"],
+            "product": "Mercedes Benz CLA-Class (177) 2015> Mita Super silicon wiper 19\"/24\"",
+            "sales": "",
+            "links": "/Mercedes-Benz-CLA-Class-(177)-2015-Mita-Super-silicon-wiper-19-24--i.170086019.2886656395"
+        }]
+
+
+
+
+        var sortedShopeeLowRange = _.map(shopee, _.clone)
+
+        var lowestProduct = sortedShopeeLowRange.filter(i => i.sales).sort((a, b) => {
+
+
+            return a.value[0] - b.value[0]
+
+
+        })[3]
+
+        console.log(lowestProduct)
+
+        var lowestPrice = lowestProduct.value.length == 2 ? `${lowestProduct.value[0]}` : `${lowestProduct.value[0]}`
+
+        var lowestLink = 'https://shopee.com.my' + lowestProduct.links
+
+
+        var sortedShopeeHighRange = _.map(shopee, _.clone)
+
+
+
+
+        var highestProductList = sortedShopeeHighRange.filter(i => i.sales).sort((a, b) => {
+            if (a.value.length > 1 && b.value.length == 1) {
+                return a.value[1] - b.value[0]
+            }
+
+            if (a.value.length > 1 && b.value.length > 1) {
+                return a.value[1] - b.value[1]
+            }
+
+            if (a.value.length == 1 && b.value.length == 1) {
+                return a.value[0] - b.value[0]
+            }
+
+
+            if (a.value.length == 1 && b.value.length > 1) {
+                return a.value[0] - b.value[1]
+            }
+
+        })
+
+        var highestProduct = highestProductList[highestProductList.length - 1]
+
+        var highestPrice = highestProduct.value.length == 2 ? `${highestProduct.value[0]}-${highestProduct.value[1]}` : `${highestProduct.value[0]}`
+
+        var highestLink = 'https://shopee.com.my' + highestProduct.links
+
+
+        var top100sales = shopee.filter(i => i.sales).reduce((acc, current) => {
+            let salesVolume = current.sales ? (current.sales.split(" ")[0].includes("k") ? parseFloat(current.sales.split(" ")[0]) * 1000 : parseFloat(current.sales.split(" ")[0])) : 0;
+            let productPrice = current.value.length == 2 ? (parseFloat(current.value[0]) + parseFloat(current.value[1])) / 2 : parseFloat(current.value[0])
+
+            return acc + productPrice * salesVolume
+        }, 0);
+
+        var top100salesVolume = shopee.filter(i => i.sales).reduce((acc, current) => {
+            let salesVolume = current.sales ? (current.sales.split(" ")[0].includes("k") ? parseFloat(current.sales.split(" ")[0]) * 1000 : parseFloat(current.sales.split(" ")[0])) : 0;
+            return acc + salesVolume
+        }, 0);
+
+        var top100salesAveragePrice = top100sales / top100salesVolume;
+
+        $(".summary").append(`
+        <div><span>Total Sales: </span><span>RM${numeral(top100sales).format("0,0")}</span></div>
+
+
+        <div><span>Sales volume: </span><span style="color: #2eab6f;">${numeral(top100salesVolume).format("0,0")}</span></div>
+        
+        
+        
+    
+        <div><span>Average price: </span><span>RM${numeral(top100salesAveragePrice).format("0,0.00")}</span></div>    
+        
+        
+        
+        <div><span>Lowest price: </span><span>RM${numeral(lowestPrice).format("0,0.00")}</span><a href="${lowestLink}">Detail</a></div>  
+        
+        
+        <div><span>Highest price: </span><span>RM${numeral(highestPrice).format("0,0.00")}</span><a href="${highestLink}">Detail</a></div>  
+        
+        `)
+    </script>
+</body>
+
+</html>
